@@ -3,8 +3,8 @@
 .chatWrapper {
 
   .userColumn, .chatColumn {
-    height: calc(75vh - 50px); // - fixed top bar height
-    min-height: 400px;
+    height: auto;
+    min-height: unset;
     padding-bottom: 10px;
   }
 
@@ -26,6 +26,16 @@
     .controlBtn {
       padding-top: 0;
       padding-bottom: 0;
+    }
+  }
+}
+
+@media only screen and (min-width: 768px) {
+  .chatWrapper {
+
+    .userColumn, .chatColumn {
+      height: calc(75vh - 50px); // - fixed top bar height
+      min-height: 400px;
     }
   }
 }

@@ -120,7 +120,16 @@ class App extends Component {
               <LinkContainer to="/about">
                 <NavItem>About Us</NavItem>
               </LinkContainer>
-
+            </Nav>
+            {user && (
+              <p className="navbar-text">
+                <strong>{user.email}</strong>
+              </p>
+            )}
+            <Nav navbar pullRight>
+              <NavItem target="_blank" title="View on Github" href="https://github.com/ahmader/react-app">
+                <i className="fa fa-github" />
+              </NavItem>
               {!user && (
                 <LinkContainer to="/login">
                   <NavItem>Login</NavItem>
@@ -138,16 +147,6 @@ class App extends Component {
                   </NavItem>
                 </LinkContainer>
               )}
-            </Nav>
-            {user && (
-              <p className="navbar-text">
-                <strong>{user.email}</strong>
-              </p>
-            )}
-            <Nav navbar pullRight>
-              <NavItem target="_blank" title="View on Github" href="https://github.com/ahmader/react-app">
-                <i className="fa fa-github" />
-              </NavItem>
             </Nav>
           </Navbar.Collapse>
         </Navbar>
