@@ -1,9 +1,9 @@
 
 # React Redux Universal Hot Example
 
-[![Build Status](https://travis-ci.org/bertho-zero/react-redux-universal-hot-example.svg?branch=master&style=flat-square)](https://travis-ci.org/bertho-zero/react-redux-universal-hot-example)
-[![Dependency Status](https://david-dm.org/bertho-zero/react-redux-universal-hot-example.svg?style=flat-square)](https://david-dm.org/bertho-zero/react-redux-universal-hot-example)
-[![devDependency Status](https://david-dm.org/bertho-zero/react-redux-universal-hot-example/dev-status.svg?style=flat-square)](https://david-dm.org/bertho-zero/react-redux-universal-hot-example?type=dev)
+[![Build Status](https://travis-ci.org/ahmader/react-app.svg?branch=master&style=flat-square)](https://travis-ci.org/ahmader/react-app)
+[![Dependency Status](https://david-dm.org/ahmader/react-app.svg?style=flat-square)](https://david-dm.org/ahmader/react-app)
+[![devDependency Status](https://david-dm.org/ahmader/react-app/dev-status.svg?style=flat-square)](https://david-dm.org/ahmader/react-app?type=dev)
 
 ---
 
@@ -118,7 +118,7 @@ yarn start
 
 ## Demo
 
-A demonstration of this app can be seen [running on heroku](https://react-hot-example.herokuapp.com/), which is a deployment of the [heroku branch](https://github.com/bertho-zero/react-redux-universal-hot-example/tree/heroku).
+A demonstration of this app can be seen [running on heroku](https://react-hot-example.herokuapp.com/), which is a deployment of the [heroku branch](https://github.com/ahmader/react-app/tree/heroku).
 
 ## Explanation
 
@@ -137,7 +137,7 @@ We also spit out the `redux` state into a global `window.__data` variable in the
 
 #### Server-side Data Fetching
 
-The [redial](https://www.npmjs.com/package/redial) package exposes an API to return promises that need to be fulfilled before a route is rendered. It exposes a `<ReduxAsyncConnect />` container, which wraps our render tree on both [server](https://github.com/bertho-zero/react-redux-universal-hot-example/blob/master/src/server.js) and [client](https://github.com/bertho-zero/react-redux-universal-hot-example/blob/master/src/client.js). More documentation is available on the [redial](https://www.npmjs.com/package/redial) page.
+The [redial](https://www.npmjs.com/package/redial) package exposes an API to return promises that need to be fulfilled before a route is rendered. It exposes a `<ReduxAsyncConnect />` container, which wraps our render tree on both [server](https://github.com/ahmader/react-app/blob/master/src/server.js) and [client](https://github.com/ahmader/react-app/blob/master/src/client.js). More documentation is available on the [redial](https://www.npmjs.com/package/redial) page.
 
 #### Client Side
 
@@ -145,7 +145,7 @@ The client side entry point is reasonably named `client.js`. All it does is load
 
 #### Redux Middleware
 
-The middleware, [`clientMiddleware.js`](https://github.com/bertho-zero/react-redux-universal-hot-example/blob/master/src/redux/middleware/clientMiddleware.js), serves two functions:
+The middleware, [`clientMiddleware.js`](https://github.com/ahmader/react-app/blob/master/src/redux/middleware/clientMiddleware.js), serves two functions:
 
 1. To allow the action creators access to the client API facade. Remember this is the same on both the client and the server, and cannot simply be `import`ed because it holds the cookie needed to maintain session on server-to-server requests.
 2. To allow some actions to pass a "promise generator", a function that takes the API client and returns a promise. Such actions require three action types, the `REQUEST` action that initiates the data loading, and a `SUCCESS` and `FAILURE` action that will be fired depending on the result of the promise. There are other ways to accomplish this, some discussed [here](https://github.com/reactjs/redux/issues/99), which you may prefer, but to the author of this example, the middleware way feels cleanest.
@@ -282,6 +282,7 @@ Thanks for checking this out.
 
 Created by:
 – Erik Rasmussen, [@erikras](https://twitter.com/erikras)
+– Kévin Berthommier, [@bertho-zero](https://github.com/bertho-zero)
 
 Maintened by:
-– Kévin Berthommier, [@bertho-zero](https://github.com/bertho-zero)
+– Ahmader, [@ahmader](https://github.com/ahmader)

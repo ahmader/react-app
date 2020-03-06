@@ -1,7 +1,7 @@
 {
-  "name": "react-redux-universal-hot-example",
+  "name": "react-app",
   "description": "Example of an isomorphic (universal) webapp using react redux and hot reloading",
-  "repository": "https://github.com/erikras/react-redux-universal-hot-example",
+  "repository": "https://github.com/ahmader/react-app",
   "logo": "http://node-js-sample.herokuapp.com/node.svg",
   "keywords": [
     "react",

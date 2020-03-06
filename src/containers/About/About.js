@@ -29,22 +29,22 @@ class About extends Component {
         <Helmet title="About Us" />
 
         <p>
-          This project is maintained by Kévin Berthommier (
-          <a href="https://github.com/bertho-zero" target="_blank" rel="noopener noreferrer">
-            @bertho-zero
+          This project is maintained by Ahmader (
+          <a href="https://github.com/ahmader" target="_blank" rel="noopener noreferrer">
+            @ahmader
           </a>
           ) and was originally created by Erik Rasmussen (
           <a href="https://twitter.com/erikras" target="_blank" rel="noopener noreferrer">
             @erikras
           </a>
-          ),
+          ), and Kévin Berthommier (
+          <a href="https://github.com/bertho-zero" target="_blank" rel="noopener noreferrer">
+            @bertho-zero
+          </a>
+          )
           <br />
           but has since seen many contributions from the open source community. Thank you to{' '}
-          <a
-            href="https://github.com/bertho-zero/react-redux-universal-hot-example/graphs/contributors"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
+          <a href="https://github.com/ahmader/react-app/graphs/contributors" target="_blank" rel="noopener noreferrer">
             all the contributors
           </a>
           .

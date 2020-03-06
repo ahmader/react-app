@@ -34,7 +34,7 @@ app
   .use(bodyParser.json())
   // Core
   .configure(express.rest())
-  .configure(socketio({ path: '/ws' }))
+  .configure(socketio({ pingTimeout: 30000, path: '/ws' }))
   .configure(services)
   .configure(channels)
   // Final handlers

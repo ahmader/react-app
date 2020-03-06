@@ -1,7 +1,7 @@
 {
-  "name": "react-redux-universal-hot-example",
+  "name": "react-app",
   "description": "Example of an isomorphic (universal) webapp using react redux and hot reloading",
-  "author": "Kévin Berthommier <kevin.bertho@gmail.com> (http://github.com/bertho-zero)",
+  "author": "Ahmader <ahmader@gmail.com> (http://github.com/ahmader)",
   "contributors": [
     "Erik Rasmussen <rasmussenerik@gmail.com> (http://github.com/erikras)"
   ],
@@ -9,9 +9,9 @@
   "version": "0.9.0",
   "repository": {
     "type": "git",
-    "url": "https://github.com/bertho-zero/react-redux-universal-hot-example"
+    "url": "https://github.com/ahmader/react-app"
   },
-  "homepage": "https://github.com/bertho-zero/react-redux-universal-hot-example",
+  "homepage": "https://github.com/ahmader/react-app",
   "keywords": [
     "react",
     "isomorphic",

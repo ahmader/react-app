@@ -145,11 +145,7 @@ class App extends Component {
               </p>
             )}
             <Nav navbar pullRight>
-              <NavItem
-                target="_blank"
-                title="View on Github"
-                href="https://github.com/bertho-zero/react-redux-universal-hot-example"
-              >
+              <NavItem target="_blank" title="View on Github" href="https://github.com/ahmader/react-app">
                 <i className="fa fa-github" />
               </NavItem>
             </Nav>
@@ -173,11 +169,7 @@ class App extends Component {
 
         <div className="well text-center">
           Have questions? Ask for help{' '}
-          <a
-            href="https://github.com/bertho-zero/react-redux-universal-hot-example/issues"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
+          <a href="https://github.com/ahmader/react-app/issues" target="_blank" rel="noopener noreferrer">
             on Github
           </a>
           .
