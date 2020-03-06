@@ -83,6 +83,10 @@ This new level of quality allows Progressive Web Apps to earn a place on the use
 ```bash
 yarn
 ```
+If any errors, run
+```bash
+yarn cache clean && yarn upgrade && yarn
+```
 
 ## Running Dev Server
 

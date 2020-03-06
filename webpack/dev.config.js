@@ -178,7 +178,10 @@ const webpackConfig = {
   },
   resolve: {
     modules: ['src', 'node_modules'],
-    extensions: ['.json', '.js', '.jsx']
+    extensions: ['.json', '.js', '.jsx'],
+    alias: {
+      'react-dom': '@hot-loader/react-dom'
+    }
   },
   plugins: [
     // https://goo.gl/dTQYan

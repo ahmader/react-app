@@ -59,6 +59,7 @@
     "@feathersjs/rest-client": "^1.3.2",
     "@feathersjs/socketio": "^3.0.1",
     "@feathersjs/socketio-client": "^1.0.1",
+    "@hot-loader/react-dom": "16.8.6",
     "axios": "^0.18.0",
     "body-parser": "^1.16.1",
     "classnames": "^2.2.5",
@@ -104,7 +105,7 @@
     "redux-logger": "^3.0.6",
     "redux-persist": "^5.3.4",
     "regenerator-runtime": "^0.13.2",
-    "serialize-javascript": "^1.3.0",
+    "serialize-javascript": "2.1.1",
     "serve-favicon": "^2.3.2",
     "socket.io-client": "^2.0.1"
   },

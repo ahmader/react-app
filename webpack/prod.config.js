@@ -166,7 +166,10 @@ module.exports = {
   },
   resolve: {
     modules: ['src', 'node_modules'],
-    extensions: ['.json', '.js', '.jsx']
+    extensions: ['.json', '.js', '.jsx'],
+    alias: {
+      'react-dom': '@hot-loader/react-dom'
+    }
   },
   plugins: [
     /* wepack build status - show webpack build progress in terminal */
@@ -205,7 +208,7 @@ module.exports = {
     }),
 
     new SWPrecacheWebpackPlugin({
-      cacheId: 'react-redux-universal-hot-example',
+      cacheId: 'react-app',
       filename: 'service-worker.js',
       maximumFileSizeToCacheInBytes: 8388608,
 
