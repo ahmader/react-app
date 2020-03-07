@@ -31,8 +31,8 @@ class Home extends Component {
             </div>
             <h1>{config.app.title}</h1>
 
+            <h5>Hello, World!</h5>
             <h2>{config.app.description}</h2>
-
             <p>
               <a
                 className={styles.github}
@@ -47,11 +47,7 @@ class Home extends Component {
             {online && <GithubButton user="ahmader" repo="react-app" type="fork" width={160} height={30} count large />}
 
             <p className={styles.humility}>
-              Created by{' '}
-              <a href="https://twitter.com/erikras" target="_blank" rel="noopener noreferrer">
-                @erikras
-              </a>{' '}
-              and maintained by{' '}
+              Maintained by{' '}
               <a href="https://github.com/ahmader" target="_blank" rel="noopener noreferrer">
                 @ahmader
               </a>
