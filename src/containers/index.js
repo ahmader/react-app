@@ -7,9 +7,6 @@ import Home from './Home/Home';
 // export LoginSuccess from './LoginSuccess/LoginSuccess';
 import NotFound from './NotFound/NotFound';
 // export Register from './Register/Register';
-
-export default {
-  App,
-  Home,
-  NotFound
-};
+export { App };
+export { Home };
+export { NotFound };
