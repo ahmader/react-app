@@ -105,9 +105,12 @@
     "redux-logger": "^3.0.6",
     "redux-persist": "^5.3.4",
     "regenerator-runtime": "^0.13.2",
+    "semantic-ui-css": "^2.4.1",
+    "semantic-ui-react": "^0.88.2",
     "serialize-javascript": "2.1.1",
     "serve-favicon": "^2.3.2",
-    "socket.io-client": "^2.0.1"
+    "socket.io-client": "^2.0.1",
+    "winston": "^3.2.1"
   },
   "devDependencies": {
     "@babel/core": "^7.4.3",

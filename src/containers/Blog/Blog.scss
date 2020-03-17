@@ -1,8 +1,8 @@
 @import '../../theme/variables.scss';
 
-.chatWrapper {
+.blogWrapper {
 
-  .userColumn, .chatColumn {
+  .userColumn, .blogColumn {
     height: auto;
     min-height: unset;
     padding-bottom: 10px;
@@ -15,7 +15,7 @@
     }
   }
 
-  .chatColumn {
+  .blogColumn {
     position: relative;
 
     .messages {
@@ -35,9 +35,9 @@
 }
 
 @media only screen and (min-width: 768px) {
-  .chatWrapper {
+  .blogWrapper {
 
-    .userColumn, .chatColumn {
+    .userColumn, .blogColumn {
       height: calc(75vh - 50px); // - fixed top bar height
       min-height: 400px;
     }

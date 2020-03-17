@@ -7,6 +7,7 @@ import { validateHook } from 'hooks';
 import {
   required, email, match, unique
 } from 'utils/validation';
+import logger from 'utils/logger';
 
 const schemaValidator = {
   email: [required, email, unique('email')],
@@ -28,6 +29,7 @@ function validate() {
 
 const userHooks = {
   before: {
+    all: [logger()],
     find: auth.hooks.authenticate('jwt'),
     get: auth.hooks.authenticate('jwt'),
     create: [validate(), discard('password_confirmation'), local.hooks.hashPassword()],
@@ -43,6 +45,9 @@ const userHooks = {
     update: [],
     patch: [],
     remove: []
+  },
+  error: {
+    all: [logger()]
   }
 };
 

@@ -117,6 +117,9 @@ class App extends Component {
               <LinkContainer to="/chat">
                 <NavItem>Chat</NavItem>
               </LinkContainer>
+              <LinkContainer to="/blog">
+                <NavItem>Blog</NavItem>
+              </LinkContainer>
               <LinkContainer to="/about">
                 <NavItem>About Us</NavItem>
               </LinkContainer>

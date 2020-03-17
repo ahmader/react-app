@@ -15,14 +15,12 @@ const schemaValidator = {
 function joinResolvers(context) {
   const { app } = context;
   const users = app.service('users');
-  console.log('joinResolvers');
-
   return {
     joins: {
-      author: () => async message => {
-        const author = message.sentBy ? await users.get(message.sentBy) : null;
-        message.author = author;
-        return message;
+      author: () => async post => {
+        const author = post.sentBy ? await users.get(post.sentBy) : null;
+        post.author = author;
+        return post;
       }
     }
   };
@@ -35,7 +33,7 @@ const joinAuthor = [
   local.hooks.protect('author.password')
 ];
 
-const messagesHooks = {
+const postsHooks = {
   before: {
     all: [logger()],
     find: [],
@@ -44,10 +42,11 @@ const messagesHooks = {
       validate(schemaValidator),
       context => {
         const { data, params } = context;
+        console.log('message.create', { data, params });
 
         context.data = {
           text: data.text,
-          sentBy: params.user ? params.user._id : null, // Set the id of current user
+          sentBy: data.sentBy || (params.user ? params.user._id : null), // Set the id of current user
           createdAt: new Date()
         };
       }
@@ -60,9 +59,9 @@ const messagesHooks = {
       iff(isProvider('external'), keep('text')),
       async context => {
         const { id, data, app } = context;
-        const message = await app.service('messages').get(id);
-        const history = message.history || [];
-        history.push({ createdAt: message.updatedAt || message.createdAt, text: message.text });
+        const post = await app.service('posts').get(id);
+        const history = post.history || [];
+        history.push({ createdAt: post.updatedAt || post.createdAt, text: post.text });
         console.log(JSON.stringify(context, null, 2));
         context.data = {
           text: data.text,
@@ -74,15 +73,16 @@ const messagesHooks = {
     remove: disallow()
   },
   after: {
-    // all: [logger()],
-    find: joinAuthor,
+    all: [logger()],
+    find: [],
+    // find: joinAuthor,
     get: joinAuthor,
     create: joinAuthor,
     update: [],
     patch: joinAuthor.concat([
       context => {
         const { app, result } = context;
-        app.service('messages').emit('patchedMessage', result);
+        app.service('posts').emit('patchedPost', result);
       }
     ]),
     remove: []
@@ -92,4 +92,4 @@ const messagesHooks = {
   }
 };
 
-export default messagesHooks;
+export default postsHooks;

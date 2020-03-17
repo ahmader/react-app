@@ -69,6 +69,7 @@ const webpackConfig = {
         include: [path.resolve(__dirname, '../src')],
         loader: 'json-loader'
       },
+      { test: /\.css$/, loader: 'style-loader!css-loader' },
       {
         test: /\.less$/,
         include: [path.resolve(__dirname, '../src')],
@@ -189,7 +190,7 @@ const webpackConfig = {
     // }),
 
     /* wepack build status - show webpack build progress in terminal */
-    new webpack.ProgressPlugin(),
+    // new webpack.ProgressPlugin(),
 
     // hot reload
     new webpack.HotModuleReplacementPlugin(),

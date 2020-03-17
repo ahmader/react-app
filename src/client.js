@@ -29,7 +29,7 @@ const persistConfig = {
     // Ignore state from cookies, only use preloadedState from window object
     return originalState;
   },
-  whitelist: ['auth', 'info', 'chat']
+  whitelist: ['auth', 'info', 'chat', 'blog']
 };
 
 const dest = document.getElementById('content');
@@ -44,9 +44,11 @@ const providers = {
 function initSocket() {
   socket.on('news', data => {
     console.log(data);
+    console.warn('initSocket.news.data', data);
     socket.emit('my other event', { my: 'data from client' });
   });
   socket.on('msg', data => {
+    console.warn('initSocket.msg.msg', data);
     console.log(data);
   });
 
@@ -58,6 +60,7 @@ initSocket();
 (async () => {
   const preloadedState = await getStoredState(persistConfig);
   const online = window.__data ? true : await isOnline();
+  console.log('app.isOnline', window.__data ? window.__data : 'is_not__data', online);
 
   if (online) {
     socket.open();
@@ -78,7 +81,6 @@ initSocket();
 
   const triggerHooks = async (_routes, pathname) => {
     NProgress.start();
-
     const { components, match, params } = await asyncMatchRoutes(_routes, pathname);
     const triggerLocals = {
       ...providers,
@@ -100,7 +102,6 @@ initSocket();
       await trigger('fetch', components, triggerLocals);
     }
     await trigger('defer', components, triggerLocals);
-
     NProgress.done();
   };
 

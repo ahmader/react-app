@@ -25,7 +25,9 @@ export default app => {
       // Channels can be named anything and joined on any condition
 
       // E.g. to send real-time events only to admins use
-      // if(user.isAdmin) { app.channel('admins').join(connection); }
+      if (connection.user && connection.user.isAdmin) {
+        app.channel('admins').join(connection);
+      }
 
       // If the user has joined e.g. chat rooms
       // if(Array.isArray(user.rooms)) user.rooms.forEach(room => app.channel(`rooms/${room.id}`).join(channel));
@@ -46,7 +48,7 @@ export default app => {
 
   // Here you can also add service specific event publishers
   // e..g the publish the `users` service `created` event to the `admins` channel
-  // app.service('users').publish('created', () => app.channel('admins'));
+  app.service('users').publish('created', () => app.channel('admins'));
 
   // With the userid and email organization from above you can easily select involved users
   // app.service('messages').publish(() => {

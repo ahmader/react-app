@@ -6,9 +6,13 @@ import hooks from './hooks';
 
 const updateVisitors = app => {
   const { connections } = app.channel('chat');
+  // console.log('app.updateVisitors.connections', connections);
 
   app.service('messages').emit('updateVisitors', {
-    authenticated: _.uniqBy(connections.filter(v => v.user).map(con => con.user), '_id'),
+    authenticated: _.uniqBy(
+      connections.filter(v => v.user).map(con => con.user),
+      '_id'
+    ),
     anonymous: connections.filter(v => !v.user).length
   });
 };
@@ -23,7 +27,7 @@ export default function messagesService(app) {
       default: 25,
       max: 100
     },
-    events: ['updateVisitors']
+    events: ['updateVisitors', 'patchedMessage']
   };
 
   app.use('/messages', feathersNedb(options));
@@ -35,22 +39,23 @@ export default function messagesService(app) {
   service.publish('created', () => app.channel('anonymous', 'authenticated'));
 
   service.publish('updateVisitors', () => app.channel('chat'));
+  // service.publish('patchedMessage', () => app.channel('chat'));
 
   app.on('connection', connection => {
     const socket = connection[SOCKET_KEY];
-    const chatChannel = app.channel('chat');
 
     socket.on('joinChat', () => {
-      chatChannel.join(connection);
+      app.channel('chat').join(connection);
       updateVisitors(app);
     });
 
     socket.on('leaveChat', () => {
-      chatChannel.leave(connection);
+      app.channel('chat').leave(connection);
       updateVisitors(app);
     });
 
     socket.on('disconnect', () => {
+      console.warn('socketio.messages.disconnect');
       updateVisitors(app);
     });
   });

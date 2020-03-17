@@ -18,7 +18,17 @@ const MessageEdition = ({
       <form onSubmit={handleSubmit}>
         <h4 className="media-heading">
           {message.author ? message.author.email : 'Anonymous'}{' '}
-          <small>{new Date(message.createdAt).toLocaleString()}</small>{' '}
+          {message.updatedAt ? (
+            <small>
+              <i>
+                {new Date(message.updatedAt).toLocaleString()}{' '}
+                <span className={cn('text-danger', styles.updated)}>*updated*</span>
+              </i>
+            </small>
+          ) : (
+            <small>{new Date(message.createdAt).toLocaleString()}</small>
+          )}{' '}
+          {/* <small>{new Date(message.createdAt).toLocaleString()}</small>{' '} */}
           <button type="submit" className={cn('btn btn-sm btn-link', styles.controlBtn)} tabIndex={0} title="Validate">
             <span className="fa fa-check text-success" aria-hidden="true" />
           </button>
@@ -47,7 +57,8 @@ const MessageEdition = ({
 
 MessageEdition.propTypes = {
   styles: PropTypes.shape({
-    controlBtn: PropTypes.string
+    controlBtn: PropTypes.string,
+    updated: PropTypes.string
   }).isRequired,
   patchMessage: PropTypes.func.isRequired,
   message: PropTypes.objectOf(PropTypes.any).isRequired,

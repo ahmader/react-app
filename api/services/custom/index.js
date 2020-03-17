@@ -11,14 +11,24 @@ export default function customService(app) {
 
   app.use('/visitors', (req, res) => {
     const { connections } = app.channel('chat');
+    // console.log('app.use.visitors');
+
     res.json({
-      authenticated: _.uniqBy(connections.filter(v => v.user).map(con => con.user), '_id'),
-      anonymous: connections.filter(v => !v.user).length
+      authenticated: _.uniqBy(
+        connections.filter(v => v.user).map(con => con.user),
+        '_id'
+      ),
+      anonymous: connections.filter(v => !v.user).length,
+      connections
     });
   });
 
   app.on('connection', connection => {
     const socket = connection[SOCKET_KEY];
+    console.log('app.on.connection.connected [Sending news....]');
     socket.emit('news', { msg: "'Hello World!' from server" });
+    socket.on('my other event', data => {
+      console.log('socket.on.[my other event]', data);
+    });
   });
 }

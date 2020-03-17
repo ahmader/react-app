@@ -2,6 +2,7 @@ import { connectedRouterRedirect } from 'redux-auth-wrapper/history4/redirect';
 import { App, Home, NotFound } from 'containers';
 import About from 'containers/About/Loadable';
 import Chat from 'containers/Chat/Loadable';
+import Blog from 'containers/Blog/Loadable';
 import Login from 'containers/Login/Loadable';
 import LoginSuccess from 'containers/LoginSuccess/Loadable';
 import Register from 'containers/Register/Loadable';
@@ -26,6 +27,7 @@ const routes = [
       { path: '/', exact: true, component: Home },
       { path: '/about', component: About },
       { path: '/chat', component: Chat },
+      { path: '/blog', component: isAuthenticated(Blog) },
       { path: '/login', component: Login },
       { path: '/login-success', component: isAuthenticated(LoginSuccess) },
       { path: '/register', component: isNotAuthenticated(Register) },

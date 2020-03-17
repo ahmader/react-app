@@ -9,7 +9,8 @@ export default class MessageItem extends Component {
       email: PropTypes.string
     }),
     styles: PropTypes.shape({
-      controlBtn: PropTypes.string
+      controlBtn: PropTypes.string,
+      updated: PropTypes.string
     }).isRequired,
     patchMessage: PropTypes.func.isRequired,
     message: PropTypes.objectOf(PropTypes.any).isRequired

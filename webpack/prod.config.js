@@ -61,6 +61,7 @@ module.exports = {
         loader: 'babel-loader',
         exclude: /node_modules(\/|\\)(?!(@feathersjs))/
       },
+      { test: /\.css$/, loader: ExtractTextPlugin.extract('style-loader', 'css-loader') },
       {
         test: /\.less$/,
         loader: ExtractTextPlugin.extract({

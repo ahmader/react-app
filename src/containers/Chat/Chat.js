@@ -4,6 +4,7 @@ import { provideHooks } from 'redial';
 import { connect } from 'react-redux';
 import cn from 'classnames';
 import reducer, * as chatActions from 'redux/modules/chat';
+
 import { withApp } from 'hoc';
 import MessageItem from 'components/MessageItem/MessageItem';
 import { socket } from 'app';
@@ -12,15 +13,18 @@ import { socket } from 'app';
   inject: ({ store }) => store.inject({ chat: reducer }),
   fetch: async ({ store: { dispatch, getState } }) => {
     const state = getState();
-
+    console.warn('fetching1......', state);
     if (state.online) {
       await dispatch(chatActions.listVisitors());
-      return dispatch(chatActions.load()).catch(() => null);
+      const data = await dispatch(chatActions.load()).catch(() => null);
+      console.warn('fetching3......', data);
+      return data;
     }
   }
 })
 @connect(
   state => ({
+    loaded: state.chat.loaded,
     messages: state.chat.messages,
     visitors: state.chat.visitors,
     user: state.auth.user
@@ -39,15 +43,20 @@ class Chat extends Component {
     addMessage: PropTypes.func.isRequired,
     patchMessage: PropTypes.func.isRequired,
     updateVisitors: PropTypes.func.isRequired,
+    patchedMessage: PropTypes.func.isRequired,
     messages: PropTypes.arrayOf(PropTypes.object).isRequired,
     visitors: PropTypes.shape({
       authenticated: PropTypes.array,
-      anonymous: PropTypes.number
-    }).isRequired
+      anonymous: PropTypes.number,
+      connections: PropTypes.array
+    }).isRequired,
+    loaded: PropTypes.bool,
+    load: PropTypes.func.isRequired
   };
 
   static defaultProps = {
-    user: null
+    user: null,
+    loaded: false
   };
 
   constructor(props) {
@@ -61,15 +70,28 @@ class Chat extends Component {
   };
 
   componentDidMount() {
-    const { app, addMessage, updateVisitors } = this.props;
-
+    const {
+      app, addMessage, updateVisitors, patchedMessage, load, loaded
+    } = this.props;
+    console.warn('Chat.componentDidMount', this.props);
     const service = app.service('messages');
 
     service.on('created', addMessage);
+    service.on('patchedMessage', patchedMessage);
     setImmediate(() => this.scrollToBottom());
-
     service.on('updateVisitors', updateVisitors);
+
     socket.emit('joinChat');
+
+    // console.warn('fetching2......', loaded);
+    if (!loaded) {
+      load().catch(() => null);
+      // load().then(d => {
+      //   // const d = load();
+      //   console.warn('fetching4......', d);
+
+      // }).catch()
+    }
   }
 
   componentDidUpdate(prevProps) {
@@ -81,14 +103,21 @@ class Chat extends Component {
   }
 
   componentWillUnmount() {
-    const { app, addMessage, updateVisitors } = this.props;
+    const {
+      app, addMessage, updateVisitors, patchedMessage
+    } = this.props;
 
     app
       .service('messages')
       .removeListener('created', addMessage)
+      .removeListener('patchedMessage', patchedMessage)
       .removeListener('updateVisitors', updateVisitors);
     socket.emit('leaveChat');
   }
+
+  handleJoin = async () => {
+    socket.emit('joinChat');
+  };
 
   handleSubmit = async event => {
     const { app } = this.props;
@@ -164,6 +193,9 @@ class Chat extends Component {
                     Send
                   </button>
                 </span>
+                <button className="btn btn-default" type="button" onClick={this.handleJoin}>
+                  join
+                </button>
               </div>
             </form>
           </div>

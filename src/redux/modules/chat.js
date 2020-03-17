@@ -9,6 +9,7 @@ const ADD_MESSAGE = 'redux-example/chat/ADD_MESSAGE';
 const PATCH_MESSAGE = 'redux-example/chat/PATCH_MESSAGE';
 const PATCH_MESSAGE_SUCCESS = 'redux-example/chat/PATCH_MESSAGE_SUCCESS';
 const PATCH_MESSAGE_FAIL = 'redux-example/chat/PATCH_MESSAGE_FAIL';
+const PATCHED_MESSAGE = 'redux-example/chat/PATCHED_MESSAGE';
 
 const initialState = {
   loaded: false,
@@ -50,6 +51,11 @@ export default function reducer(state = initialState, action = {}) {
       return {
         ...state,
         messages: state.messages.concat(action.message)
+      };
+    case PATCHED_MESSAGE:
+      return {
+        ...state,
+        messages: state.messages.map(message => (message._id === action.message._id ? action.message : message))
       };
     case PATCH_MESSAGE_SUCCESS:
       return {
@@ -102,5 +108,12 @@ export function patchMessage(id, data) {
   return {
     types: [PATCH_MESSAGE, PATCH_MESSAGE_SUCCESS, PATCH_MESSAGE_FAIL],
     promise: ({ app }) => app.service('messages').patch(id, data)
+  };
+}
+
+export function patchedMessage(message) {
+  return {
+    type: PATCHED_MESSAGE,
+    message
   };
 }
